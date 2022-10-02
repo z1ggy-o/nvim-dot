@@ -20,7 +20,7 @@ require('user.nvim-tree')
 require('user.completion')
 
 -- treesitter
-require('user.nvim-treesitter')
+require('user.treesitter')
 
 -- LSP
 require('user.lsp')

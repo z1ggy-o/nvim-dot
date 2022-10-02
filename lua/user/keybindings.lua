@@ -40,7 +40,7 @@ map("x", "K", ":move '<-2<CR>gv-gv", opt)
 -- Normal Mode
 --
 
-map("n", "<leader>w", ":w<CR>", opt)
+map("n", "<leader>fw", ":w<CR>", opt)
 
 -- Window related
 -- Window splits
@@ -75,5 +75,6 @@ map("i", "jk", "<ESC>", opt)
 map("i", "kj", "<ESC>", opt)
 
 -- Telescope --
-map("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_ivy({ previewer = false }))<cr>", opt)
+--[[ map("n", "<leader>ff", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_ivy({ previewer = false }))<cr>", opt) ]]
+map("n", "<leader>ff", ":Telescope find_files theme=ivy<CR>", opt)
 map("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opt)
