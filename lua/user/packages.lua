@@ -81,6 +81,7 @@ return require('packer').startup(function(use)
 
   -- bufferline. Show buffers at the top
   use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
+  use "moll/vim-bbye"
 
   -- treesitter
   use {
@@ -97,6 +98,7 @@ return require('packer').startup(function(use)
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp" -- add LSP as source of nvim-cmp
   use "hrsh7th/cmp-nvim-lua" -- completion support for Lua
+  use "kylechui/nvim-surround" -- a better surround, can integrates with treesitter
 
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine

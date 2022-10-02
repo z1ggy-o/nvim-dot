@@ -33,3 +33,6 @@ require('user.comment')
 
 -- Git
 require('user.gitsigns')
+
+-- surround
+require('user.nvim-surround')
