@@ -36,3 +36,5 @@ require('user.gitsigns')
 
 -- surround
 require('user.nvim-surround')
+
+-- formatting and linting

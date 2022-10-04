@@ -40,7 +40,7 @@ map("x", "K", ":move '<-2<CR>gv-gv", opt)
 -- Normal Mode
 --
 
-map("n", "<leader>fw", ":w<CR>", opt)
+map("n", "<leader>fs", ":w<CR>", opt)
 
 -- Window related
 -- Window splits

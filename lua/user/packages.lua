@@ -56,6 +56,7 @@ return require('packer').startup(function(use)
   use "windwp/nvim-autopairs" -- autopairs, integrates with cmp and treesitter
   use "numtoStr/Comment.nvim" -- Easily comment
   use "JoosepAlviste/nvim-ts-context-commentstring" -- integrates with treesitter to better comment
+  use "kylechui/nvim-surround" -- a better surround, can integrates with treesitter
 
   -- Lazy load examples (can load on commands, event, or a combination of conditions, e.g., file type)
   use {'tpope/vim-dispatch', opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
@@ -98,7 +99,6 @@ return require('packer').startup(function(use)
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp" -- add LSP as source of nvim-cmp
   use "hrsh7th/cmp-nvim-lua" -- completion support for Lua
-  use "kylechui/nvim-surround" -- a better surround, can integrates with treesitter
 
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
@@ -107,6 +107,7 @@ return require('packer').startup(function(use)
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+  use "jose-elias-alvarez/null-ls.nvim" -- formatter and linter
 
   -- Telescope: the fuzzy finder
   use "nvim-telescope/telescope.nvim"
