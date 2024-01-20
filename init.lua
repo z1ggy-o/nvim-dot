@@ -1,7 +1,3 @@
--- nvim builtin options
-vim.g.mapleader = " "
-
-
 -- Install lazy.nvim
 -- It just checks if there are lazy.nvim installed in "data"/lazy/lazy.nvim
 -- If not, use git to clone it for us
@@ -18,25 +14,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)  -- Add lazy.nvim to nvim runtime
 
--- Install packages
-local plugins = {
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-    {
-    'nvim-telescope/telescope.nvim', tag = '0.1.5', -- or , branch = '0.1.x',
-      dependencies = { 'nvim-lua/plenary.nvim' }
-    },
-    {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
-}
+require("options") -- neovim builtin options
 
-local opts = { }
+-- Tells lazy.nvim to load modules form plugins directory
+require("lazy").setup("plugins") -- lazy.nvim install packages
 
-require("lazy").setup(plugins, opts) -- lazy.nvim install packages
-
--- Setup colorscheme
-require("catppuccin").setup()
-vim.cmd.colorscheme "catppuccin"
-
--- Setup fuzzy finder telescope
-local builtin = require("telescope.builtin")
-vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-vim.keymap.set('n', '<leader>sg', builtin.live_grep, {})
