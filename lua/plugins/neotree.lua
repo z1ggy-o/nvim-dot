@@ -9,14 +9,14 @@ return {
 	},
 	config = function()
 		-- Setup Neotree
-		vim.keymap.set('n', '<leader>e', ':Neotree filesystem reveal left<cr>')
+		vim.keymap.set("n", "<leader>e", ":Neotree toggle filesystem reveal left<cr>", { silent = true })
 		-- Quit Neotree
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = "neo-tree",
 			callback = function()
-				vim.api.nvim_buf_set_keymap(0, 'n', 'q', ':q<CR>', {noremap = true, silent = true}) -- 0: means current buffer, n: means in normal mode
-				vim.api.nvim_buf_set_keymap(0, 'n', '<leader>e', ':q<CR>', {noremap = true, silent = true}) -- 0: means current buffer, n: means in normal mode
-			end
+				vim.api.nvim_buf_set_keymap(0, "n", "q", ":q<CR>", { noremap = true, silent = true }) -- 0: means current buffer, n: means in normal mode
+				-- vim.api.nvim_buf_set_keymap(0, "n", "<leader>e", ":q<CR>", { noremap = true, silent = true }) -- 0: means current buffer, n: means in normal mode
+			end,
 		})
-	end
+	end,
 }
