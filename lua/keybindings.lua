@@ -122,9 +122,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- Enter q to exit help buffer
+-- Enter q to exit help buffer, qickfix window
+-- Tips: use `:set filetype?` to get the file type of the current buffer
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "help",
+	pattern = { "help", "qf" },
 	callback = function()
 		vim.api.nvim_buf_set_keymap(0, "n", "q", ":q<CR>", { noremap = true, silent = true }) -- 0: means current buffer, n: means in normal mode
 	end,
