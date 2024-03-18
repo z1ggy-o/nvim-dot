@@ -81,7 +81,7 @@ map("n", "<C-S-Right>", ":vertical resize +2<CR>", opt)
 map("n", "<S-h>", ":bprevious<CR>", opt)
 map("n", "<S-l>", ":bnext<CR>", opt)
 
-map("n", "<leader>bd", ":bdelete<CR>", { desc = "[B]uffer [D]elete" })
+-- map("n", "<leader>bd", ":bdelete<CR>", { desc = "[B]uffer [D]elete" })
 
 -- Insert Mode --
 -- press jk and kj as esc
