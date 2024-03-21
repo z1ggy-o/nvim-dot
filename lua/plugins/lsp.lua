@@ -76,15 +76,15 @@ return { -- LSP Configuration & Plugins
 
 				-- Fuzzy find all the symbols in your current document.
 				--  Symbols are things like variables, functions, types, etc.
-				map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+				map("<leader>ls", require("telescope.builtin").lsp_document_symbols, "Document [S]ymbols")
 
 				-- Fuzzy find all the symbols in your current workspace
 				--  Similar to document symbols, except searches over your whole project.
-				map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+				map("<leader>lS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace [S]ymbols")
 
 				-- Rename the variable under your cursor
 				--  Most Language Servers support renaming across files, etc.
-				map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+				map("<leader>lr", vim.lsp.buf.rename, "[R]ename")
 
 				-- Execute a code action, usually your cursor needs to be on top of an error
 				-- or a suggestion from your LSP for this to activate.
@@ -147,6 +147,56 @@ return { -- LSP Configuration & Plugins
 			-- But for many setups, the LSP (`tsserver`) will work just fine
 			-- tsserver = {},
 			--
+			clangd = {
+				{
+					keys = {
+						{ "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+					},
+					root_dir = function(fname)
+						return require("lspconfig.util").root_pattern(
+							"Makefile",
+							"configure.ac",
+							"configure.in",
+							"config.h.in",
+							"meson.build",
+							"meson_options.txt",
+							"build.ninja"
+						)(fname) or require("lspconfig.util").root_pattern(
+							"compile_commands.json",
+							"compile_flags.txt"
+						)(fname) or require("lspconfig.util").find_git_ancestor(fname)
+					end,
+					-- capabilities = {
+					-- 	offsetEncoding = { "utf-16" }, -- not sure if we need this
+					-- },
+					-- Read 'clangd --help' to know all options
+					cmd = {
+						"clangd",
+						"--background-index", -- update index in the background, faster
+						"--completion-style=detailed", -- completion suggestion style. the other option is 'bundled'
+						"--function-arg-placeholders", -- argument placeholder at completion
+						"--header-insertion=never", -- iwyu (include what you use), never baby!
+						"--fallback-style=llvm", -- the default clang-format style
+						-- "--clang-tidy", -- enable clang-tidy diagnose
+					},
+					-- Don't know the meaning, do not enable them yet
+					init_options = {
+						usePlaceholders = true,
+						completeUnimported = true,
+						clangdFileStatus = true,
+					},
+				},
+			},
+			-- no clangd_extensions been installed yet
+			-- setup = {
+			-- 	clangd = function(_, opts)
+			-- 		local clangd_ext_opts = require("lazyvim.util").opts("clangd_extensions.nvim")
+			-- 		require("clangd_extensions").setup(
+			-- 			vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts })
+			-- 		)
+			-- 		return false
+			-- 	end,
+			-- },
 
 			lua_ls = {
 				-- cmd = {...},

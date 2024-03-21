@@ -52,6 +52,8 @@ map("x", "K", ":move '<-2<CR>gv-gv", opt)
 -- Normal Mode
 --
 
+map("n", "<leader>`", "<C-^>", { desc = "Switch to previous buffer" })
+
 map("n", "<leader>qq", ":wqa<CR>", { desc = "Save and [Q]uit" })
 
 -- Files related
