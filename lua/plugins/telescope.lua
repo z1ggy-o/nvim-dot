@@ -21,6 +21,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
 		-- Useful for getting pretty icons, but requires a Nerd Font.
 		{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
+		-- Better live grep that accpet rg arguments
+		{ "nvim-telescope/telescope-live-grep-args.nvim" },
 	},
 	config = function()
 		-- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -44,6 +46,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
 		-- [[ Configure Telescope ]]
 		-- See `:help telescope` and `:help telescope.setup()`
+		local lga_actions = require("telescope-live-grep-args.actions")
+
 		require("telescope").setup({
 			-- You can put your default mappings / updates / etc. in here
 			--  All the info you're looking for is in `:help telescope.setup()`
@@ -58,12 +62,24 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
 				},
+				["live_grep_args"] = {
+					auto_quoting = false, -- need to add quote intentionally
+					mappings = {
+						i = {
+							["<C-k>"] = lga_actions.quote_prompt(),
+							["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+						},
+					},
+					theme = {},
+					-- layout_config = {mirrow = true} -- mirrow preview pane
+				},
 			},
 		})
 
 		-- Enable telescope extensions, if they are installed
 		pcall(require("telescope").load_extension, "fzf")
 		pcall(require("telescope").load_extension, "ui-select")
+		pcall(require("telescope").load_extension, "live_grep_args")
 
 		-- See `:help telescope.builtin`
 		local builtin = require("telescope.builtin")
@@ -72,7 +88,13 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
 		vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope Builtin" })
 		vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+		-- vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+		vim.keymap.set(
+			"n",
+			"<leader>sg",
+			":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+			{ desc = "[S]earch by [G]rep" }
+		)
 		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
