@@ -36,9 +36,22 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 --   term_mode = "t",
 --   command_mode = "c",
 
---
--- Visual Mode
---
+map("n", "<leader>`", "<C-^>", { desc = "Switch to previous buffer" })
+map("n", "<leader>qq", "<cmd>qa<CR>", { desc = "[Q]uit all" })
+
+-- press jk and kj as esc
+map("i", "jk", "<ESC>", opt)
+map("i", "kj", "<ESC>", opt)
+
+-- readlines-like movement
+map("i", "<C-a>", "<Home>", { noremap = true })
+map("i", "<C-e>", "<End>", { noremap = true })
+map("i", "<C-b>", "<Left>", { noremap = true })
+map("i", "<C-f>", "<Right>", { noremap = true })
+
+-- better up/down
+vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Use <> to continuously change indentions
 map("v", "<", "<gv", opt)
@@ -48,18 +61,11 @@ map("v", ">", ">gv", opt)
 map("x", "J", ":move '>+1<CR>gv-gv", opt)
 map("x", "K", ":move '<-2<CR>gv-gv", opt)
 
---
--- Normal Mode
---
-
-map("n", "<leader>`", "<C-^>", { desc = "Switch to previous buffer" })
-
-map("n", "<leader>qq", ":wqa<CR>", { desc = "Save and [Q]uit" })
-
 -- Files related
 map("n", "<leader>fs", ":w<CR>", opt)
+map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
--- Window related
+-- Window related --
 -- Window splits
 map("n", "<leader>ws", ":sp<CR>", opt)
 map("n", "<leader>wv", ":vsp<CR>", opt)
@@ -79,22 +85,10 @@ map("n", "<C-S-Down>", ":resize -2<CR>", opt)
 map("n", "<C-S-Left>", ":vertical resize -2<CR>", opt)
 map("n", "<C-S-Right>", ":vertical resize +2<CR>", opt)
 
--- Buffers
+-- Buffers --
 map("n", "<S-h>", ":bprevious<CR>", opt)
 map("n", "<S-l>", ":bnext<CR>", opt)
-
 -- map("n", "<leader>bd", ":bdelete<CR>", { desc = "[B]uffer [D]elete" })
-
--- Insert Mode --
--- press jk and kj as esc
-map("i", "jk", "<ESC>", opt)
-map("i", "kj", "<ESC>", opt)
-
--- readlines-like movement
-map("i", "<C-a>", "<Home>", { noremap = true })
-map("i", "<C-e>", "<End>", { noremap = true })
-map("i", "<C-b>", "<Left>", { noremap = true })
-map("i", "<C-f>", "<Right>", { noremap = true })
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
@@ -110,25 +104,4 @@ vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "Open [D]i
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
-
--- Enter q to exit help buffer, qickfix window
--- Tips: use `:set filetype?` to get the file type of the current buffer
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "help", "qf" },
-	callback = function()
-		vim.api.nvim_buf_set_keymap(0, "n", "q", ":q<CR>", { noremap = true, silent = true }) -- 0: means current buffer, n: means in normal mode
-	end,
-})
+-- Terminal --

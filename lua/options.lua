@@ -4,15 +4,20 @@
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "\\"
 
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
+
+-- Enables 24-bit RGB color in the |TUI|.  Uses "gui" |:highlight|
+vim.opt.termguicolors = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
+
+vim.opt.autowrite = true -- auto write when jump out of current buffer
 
 -- Make line numbers default
 vim.opt.number = true

@@ -93,7 +93,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			"n",
 			"<leader>sg",
 			":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
-			{ desc = "[S]earch by [G]rep" }
+			{ desc = "[S]earch by [G]rep", silent = true }
 		)
 		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
