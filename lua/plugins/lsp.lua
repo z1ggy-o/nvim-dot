@@ -211,6 +211,9 @@ return { -- LSP Configuration & Plugins
 						-- diagnostics = { disable = { 'missing-fields' } },
 					},
 				},
+				workspace = {
+					checkThirdParty = "Disable", -- avoid annoy "Do you need to configure your work environment as luv?" prompt
+				},
 			},
 		}
 
