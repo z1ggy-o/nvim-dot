@@ -137,6 +137,22 @@ return {
 		end,
 	},
 	{
+		"stevearc/dressing.nvim",
+		lazy = true,
+		init = function()
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.select = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.select(...)
+			end
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.input = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.input(...)
+			end
+		end,
+	},
+	{
 		"nvimdev/dashboard-nvim",
 		event = "VimEnter",
 		opts = function()
@@ -163,9 +179,9 @@ return {
       -- stylua: ignore
       center = {
         -- { action = LazyVim.telescope("files"),                                    desc = " Find file",       icon = " ", key = "f" },
-        { action = "ene | startinsert",                                        desc = " New file",        icon = " ", key = "n" },
         { action = "Telescope oldfiles",                                       desc = " Recent files",    icon = " ", key = "r" },
         { action = 'lua require("persistence").load()',                        desc = " Restore Session", icon = " ", key = "s" },
+        { action = "ene | startinsert",                                        desc = " New file",        icon = " ", key = "n" },
         { action = "Lazy",                                                     desc = " Lazy",            icon = "󰒲 ", key = "l" },
         { action = "qa",                                                       desc = " Quit",            icon = " ", key = "q" },
       },
