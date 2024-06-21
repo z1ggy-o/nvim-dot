@@ -12,7 +12,7 @@ return {
 					return vim.o.columns * 0.4
 				end
 			end,
-			open_mapping = [[<c-/>]],
+			-- open_mapping = [[<c-/>]],
 			hide_numbers = true, -- hide the number column in toggleterm buffers
 			shade_filetypes = {},
 			autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
@@ -66,5 +66,11 @@ return {
 
 		-- if you only want these mappings for toggle term use term://*toggleterm#* instead
 		vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+
+		vim.api.nvim_set_keymap("n", "<C-/>", "<cmd>ToggleTerm<CR>", {desc = "ToggleTerm"})
+		vim.api.nvim_set_keymap("t", '<C-/>', "<cmd>close<cr>", {desc = "Hide Terminal"})
+		-- some terminal send <C-/> as <C-_>
+		vim.api.nvim_set_keymap("n", "<C-_>", "<cmd>ToggleTerm<CR>", {desc = "which_key_ignore"})
+		vim.api.nvim_set_keymap("t", '<C-_>', "<cmd>close<cr>", {desc = "which_key_ignore"})
 	end,
 }
