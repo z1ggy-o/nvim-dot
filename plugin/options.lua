@@ -13,6 +13,8 @@ vim.opt.termguicolors = true
 
 vim.opt.autowrite = true -- auto write when jump out of current buffer
 
+vim.opt.wrap = false -- disable line wrap
+
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, for help with jumping.
