@@ -18,6 +18,16 @@ return { -- Autocompletion
 		-- Add vscode like pictogram to completion entries. (UI)
 		"onsails/lspkind.nvim",
 
+		-- AI Autocomplete
+		{
+			-- use `export no_proxy=127.0.0.1` to disable proxy for localhost when we use proxy.
+			-- otherwise, codeium cannot connect to the server properly
+			-- cr: https://github.com/Exafunction/codeium.nvim/issues/164
+			"Exafunction/codeium.nvim",
+			opts = {
+				-- enable_chat = true, -- chat can only through the browser in neovim, so useless
+			},
+		},
 		-- Snippet Engine & its associated nvim-cmp source
 		{
 			"L3MON4D3/LuaSnip",
@@ -60,9 +70,12 @@ return { -- Autocompletion
 			-- TODO: what is the following line means? read :h complete option
 			completion = { completeopt = "menu,menuone,noinsert" },
 
+			experimental = { ghost_text = true },
+
 			sources = {
 				{ name = "nvim_lsp" },
 				{ name = "path" },
+				{ name = "codeium" },
 				{ name = "buffer" },
 				-- { name = "luasnip" }, -- TJ does not have this, maybe cus we already have the snippet section
 			},
@@ -103,7 +116,7 @@ return { -- Autocompletion
 				-- Manually trigger a completion from nvim-cmp.
 				--  Generally you don't need this, because nvim-cmp will display
 				--  completions whenever it has completion options available.
-				["<C-Space>"] = cmp.mapping.complete({}),
+				["<C-i>"] = cmp.mapping.complete({}),
 
 				-- 'end' for abort
 				["<C-e>"] = cmp.mapping.abort(),
