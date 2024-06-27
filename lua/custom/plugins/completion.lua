@@ -116,7 +116,7 @@ return { -- Autocompletion
 				-- Manually trigger a completion from nvim-cmp.
 				--  Generally you don't need this, because nvim-cmp will display
 				--  completions whenever it has completion options available.
-				["<C-i>"] = cmp.mapping.complete({}),
+				["<C-.>"] = cmp.mapping.complete({}),
 
 				-- 'end' for abort
 				["<C-e>"] = cmp.mapping.abort(),
