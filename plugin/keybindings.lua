@@ -75,9 +75,9 @@ map("n", "<leader>wo", "<C-w>o", opt) -- close other windows
 
 -- Window navigation
 map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the right window" })
-map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the lower window" })
-map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the upper window" })
+map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 
 -- Window resize with arrow keys
 map("n", "<C-S-Up>", ":resize +2<CR>", opt)

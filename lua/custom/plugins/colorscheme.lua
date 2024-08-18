@@ -40,15 +40,15 @@ return {
 				which_key = true,
 			},
 		},
-		-- config = function()
-		-- 	vim.cmd.colorscheme("catppuccin")
-		-- end,
+		config = function()
+			vim.cmd.colorscheme("catppuccin")
+		end,
 	},
 	{ "ellisonleao/gruvbox.nvim",
 		priority = 1000 ,
-		config = function()
-			vim.o.background = "dark"
-			vim.cmd.colorscheme("gruvbox")
-		end,
+		-- config = function()
+		-- 	vim.o.background = "dark"
+		-- 	vim.cmd.colorscheme("gruvbox")
+		-- end,
 	}
 }
