@@ -41,7 +41,7 @@ return {
 			},
 		},
 		config = function()
-			vim.cmd.colorscheme("catppuccin")
+			vim.cmd.colorscheme("catppuccin-mocha")
 		end,
 	},
 	{ "ellisonleao/gruvbox.nvim",

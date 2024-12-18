@@ -98,7 +98,7 @@ return {
 	-- vscode like buffer line. also does not quit vim when there is no buffer.
 	{
 		"akinsho/bufferline.nvim",
-		version = "*",
+		-- version = "*", -- temp fix nvim 0.10 broken to use the newest version
 		dependencies = "nvim-tree/nvim-web-devicons",
 		event = "VeryLazy",
 		keys = {
