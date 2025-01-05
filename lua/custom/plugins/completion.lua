@@ -3,7 +3,21 @@ return {
 	{
 		'saghen/blink.cmp',
 		-- optional: provides snippets for the snippet source
-		dependencies = 'rafamadriz/friendly-snippets',
+		dependencies = {
+			'rafamadriz/friendly-snippets',
+
+			{ 'saghen/blink.compat', opts = { enable_events = true } }, -- add self-defined sources
+			-- AI Autocomplete
+			{
+				-- use `export no_proxy=127.0.0.1` to disable proxy for localhost when we use proxy.
+				-- otherwise, codeium cannot connect to the server properly
+				-- cr: https://github.com/Exafunction/codeium.nvim/issues/164
+				"Exafunction/codeium.nvim",
+				opts = {
+					enable_chat = false, -- chat can only through the browser in neovim, so useless
+				},
+			},
+		},
 
 		-- use a release tag to download pre-built binaries
 		version = '*',
@@ -34,7 +48,16 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { 'lsp', 'path', 'snippets', 'buffer' },
+				-- default = { 'lsp', 'path', 'snippets', 'buffer' },
+				default = { 'lsp', 'path', 'snippets', 'codeium', 'buffer' },
+				providers = {
+					codeium = {
+						name = 'codeium',
+						module = 'blink.compat.source',
+						score_offset = 3,
+						async = true,
+					},
+				},
 			},
 		},
 		opts_extend = { "sources.default" }
