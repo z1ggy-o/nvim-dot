@@ -20,7 +20,8 @@
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 
-local data = assert(vim.fn.stdpath("data")) --[[@as string]] -- for what?
+-- nvim data path, :help standard-path, :echo stdpath("path") to learn more
+local data = assert(vim.fn.stdpath("data")) --[[@as string]]
 
 local lga_actions = require("telescope-live-grep-args.actions")
 
@@ -106,3 +107,10 @@ end, { desc = "[S]earch [/] in Open Files" })
 vim.keymap.set("n", "<leader>sn", function()
 	builtin.find_files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[S]earch [N]eovim files" })
+
+-- explore plugin files (only for lazyvim package for now, but we can add other pathes if we want)
+vim.keymap.set("n", "<leader>sp",
+	function()
+	builtin.find_files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") })
+	end,
+	{ desc = "[S]earch [P]lugin files" })

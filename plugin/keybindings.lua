@@ -24,6 +24,14 @@ local opt = { noremap = true, silent = true }
 -- e.g., vim.keymap.set({'n', 'c'}, '<Leader>ex2', '<Cmd>lua vim.notify("Example 2")<CR>')
 -- 其实还有第四个可选参数，比如可以加一个描述：{desc = "xxx"}
 
+-- execute current lua line
+vim.keymap.set("n", "<space>x", ":.lua<CR>")
+vim.keymap.set("n", "<space>x", ":lua<CR>")
+
+-- quickfix list move prev next
+vim.keymap.set("n", "M-j>", "<cmd>cnext<CR>")
+vim.keymap.set("n", "M-k>", "<cmd>cprev<CR>")
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
