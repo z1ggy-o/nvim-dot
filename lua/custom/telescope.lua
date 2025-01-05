@@ -111,6 +111,6 @@ end, { desc = "[S]earch [N]eovim files" })
 -- explore plugin files (only for lazyvim package for now, but we can add other pathes if we want)
 vim.keymap.set("n", "<leader>sp",
 	function()
-	builtin.find_files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") })
+	builtin.find_files({ cmd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") })
 	end,
 	{ desc = "[S]earch [P]lugin files" })
