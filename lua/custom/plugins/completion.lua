@@ -1,23 +1,29 @@
 -- Welcome new king, blink.nvim
 return {
-	{
 		'saghen/blink.cmp',
+		build = 'cargo build --release',
+		opts_extend = {
+			"sources.completion.enabled_providers",
+			"sources.compat",
+			"sources.default"
+		},
 		-- optional: provides snippets for the snippet source
 		build = 'cargo build --release', -- build lib from the source instead of download
 		dependencies = {
-			'rafamadriz/friendly-snippets',
+			'rafamadriz/friendly-snippets', -- blink already did this for us
 
 			{ 'saghen/blink.compat', opts = { enable_events = true } }, -- add self-defined sources
 			-- AI Autocomplete
-			-- {
-			-- 	-- use `export no_proxy=127.0.0.1` to disable proxy for localhost when we use proxy.
-			-- 	-- otherwise, codeium cannot connect to the server properly
-			-- 	-- cr: https://github.com/Exafunction/codeium.nvim/issues/164
-			-- 	"Exafunction/codeium.nvim",
-			-- 	opts = {
-			-- 		enable_chat = false, -- chat can only through the browser in neovim, so useless
-			-- 	},
-			-- },
+			{ "supermaven-inc/supermaven-nvim" },
+			{
+				-- use `export no_proxy=127.0.0.1` to disable proxy for localhost when we use proxy.
+				-- otherwise, codeium cannot connect to the server properly
+				-- cr: https://github.com/Exafunction/codeium.nvim/issues/164
+				"Exafunction/codeium.nvim",
+				opts = {
+					enable_chat = false, -- chat can only through the browser in neovim, so useless
+				},
+			},
 		},
 
 		-- use a release tag to download pre-built binaries
@@ -38,13 +44,25 @@ return {
 				['<C-n>'] = { 'show', 'select_next', 'fallback' }, -- default 'show' is C-space, but it is used by macOS
 				['<C-j>'] = { 'snippet_forward', 'fallback' }, -- do not use Tab
 				['<C-k>'] = { 'snippet_backward', 'fallback' }, -- do not use Tab
+				-- use c-y to try accetp supermaven suggestion first, then fallback to normal case
+				-- ['<C-y>'] = {
+				-- 	function(cmp)
+				-- 		local ok, supermaven = pcall(require, "supermaven-nvim.completion_preview")
+				-- 		if ok and supermaven.has_suggestion() then
+				-- 			vim.schedule(supermaven.on_accept_suggestion)
+				-- 			return true
+				-- 		end
+				-- 	end,
+				-- 	'select_and_accept',
+				-- 	'fallback',
+				-- }
 			},
 
 			appearance = {
 				-- Sets the fallback highlight groups to nvim-cmp's highlight groups
 				-- Useful for when your theme doesn't support blink.cmp
 				-- Will be removed in a future release
-				use_nvim_cmp_as_default = true,
+				use_nvim_cmp_as_default = false,
 				-- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
 				-- Adjusts spacing to ensure icons are aligned
 				nerd_font_variant = 'mono'
@@ -73,12 +91,20 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { 'lsp', 'path', 'snippets', 'buffer' },
-				-- default = { 'lsp', 'path', 'snippets', 'codeium', 'buffer' },
+				-- default = { 'lsp', 'path', 'snippets', 'buffer' },
+				default = { 'lsp', 'path', 'snippets', 'supermaven', 'codeium', 'buffer' },
+				-- compat = { 'supermaven', 'codeium' },
 				providers = {
 					codeium = {
 						enabled = false,
 						name = 'codeium',
+						module = 'blink.compat.source',
+						score_offset = 100,
+						async = true,
+					},
+					supermaven = {
+						-- kind = "Supermaven",
+						-- name = 'supermaven',
 						module = 'blink.compat.source',
 						score_offset = 3,
 						async = true,
@@ -86,8 +112,6 @@ return {
 				},
 			},
 		},
-		opts_extend = { "sources.default" },
-	}
 }
 
 --[[
