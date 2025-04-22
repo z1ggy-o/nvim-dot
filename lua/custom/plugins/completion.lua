@@ -83,7 +83,7 @@ return {
 				documentation = { auto_show = true, auto_show_delay_ms = 800 },
 
 				-- Display a preview of the selected item on the current line
-				ghost_text = { enabled = true },
+				ghost_text = { enabled = false },
 			},
 
 			signature = { enabled = true},
