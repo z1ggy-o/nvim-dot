@@ -1,10 +1,9 @@
 return {
     "OXY2DEV/markview.nvim",
-    enabled = true,
+    enabled = false,
     dependencies = {
         "nvim-tree/nvim-web-devicons", -- Used by the code bloxks
     },
-
     opts = {
         preview = {
             hybrid_modes = { "n" },
