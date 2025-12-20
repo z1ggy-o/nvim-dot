@@ -1,29 +1,19 @@
 -- Welcome new king, blink.nvim
 return {
 		'saghen/blink.cmp',
-		build = 'cargo build --release',
+		build = 'cargo build --release', -- build lib from the source instead of download
 		opts_extend = {
 			"sources.completion.enabled_providers",
 			"sources.compat",
 			"sources.default"
 		},
 		-- optional: provides snippets for the snippet source
-		build = 'cargo build --release', -- build lib from the source instead of download
 		dependencies = {
 			'rafamadriz/friendly-snippets', -- blink already did this for us
 
 			{ 'saghen/blink.compat', opts = { enable_events = true } }, -- add self-defined sources
 			-- AI Autocomplete
 			{ "supermaven-inc/supermaven-nvim" },
-			{
-				-- use `export no_proxy=127.0.0.1` to disable proxy for localhost when we use proxy.
-				-- otherwise, codeium cannot connect to the server properly
-				-- cr: https://github.com/Exafunction/codeium.nvim/issues/164
-				"Exafunction/codeium.nvim",
-				opts = {
-					enable_chat = false, -- chat can only through the browser in neovim, so useless
-				},
-			},
 		},
 
 		-- use a release tag to download pre-built binaries
@@ -92,16 +82,9 @@ return {
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
 				-- default = { 'lsp', 'path', 'snippets', 'buffer' },
-				default = { 'lsp', 'path', 'snippets', 'supermaven', 'codeium', 'buffer' },
+				default = { 'lsp', 'path', 'snippets', 'supermaven', 'buffer' },
 				-- compat = { 'supermaven', 'codeium' },
 				providers = {
-					codeium = {
-						enabled = false,
-						name = 'codeium',
-						module = 'blink.compat.source',
-						score_offset = 100,
-						async = true,
-					},
 					supermaven = {
 						-- kind = "Supermaven",
 						-- name = 'supermaven',
