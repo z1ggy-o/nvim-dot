@@ -121,3 +121,37 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- 		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 -- 	end,
 -- })
+
+--[[
+-- Center buffer contents
+-- https://simondalvai.org/blog/neovim-center-buffer/
+local full_screen = 191
+
+-- default status column, simply 2 spaces
+-- other options: (may affect performance)
+-- %l	line number of currently drawn line
+-- %r	relative line number of currently drawn line
+-- %s	sign column for currently drawn line
+-- %C	fold column for currently drawn line
+local statuscolumn = " %r"
+-- status column if only one buffer is open
+-- (full_screen - text width) / 2
+local statuscolumn_wide = string.rep(" ", (full_screen - 100) / 2) .. statuscolumn
+
+-- set default
+vim.o.statuscolumn = statuscolumn
+
+-- check window list count and adapt padding
+vim.api.nvim_create_autocmd({
+    'BufEnter', 'BufWinEnter', 'BufWinLeave', 'WinEnter', 'WinLeave', 'WinResized', 'VimResized'
+}, {
+  callback = function()
+      local winwidth = vim.api.nvim_win_get_width(0)
+      if winwidth > (full_screen / 2) then
+        vim.o.statuscolumn = statuscolumn_wide
+      else
+        vim.o.statuscolumn = statuscolumn
+      end
+  end,
+})
+]]
