@@ -16,7 +16,6 @@ return {
 		},
 		filetypes = {
 			markdown = {
-			dir_path = function() return vim.fn.expand("%:h") .. "/attachments" end,
 				template = "![image$CURSOR]($FILE_PATH)",
 			},
 			tex = {
