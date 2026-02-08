@@ -12,7 +12,6 @@ vim.opt.termguicolors = true
 --  For more options, you can see `:help option-list`
 
 vim.opt.autowrite = true -- auto write when jump out of current buffer
-
 vim.opt.wrap = false -- disable line wrap
 
 -- Make line numbers default
