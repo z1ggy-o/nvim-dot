@@ -8,7 +8,7 @@ vim.g.maplocalleader = "\\"
 -- It just checks if there are lazy.nvim installed in "data"/lazy/lazy.nvim
 -- If not, use git to clone it for us
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
 		"clone",

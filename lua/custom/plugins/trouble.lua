@@ -1,18 +1,18 @@
 --  Better diagnostics list
 return {
 	"folke/trouble.nvim",
-	cmd = { "TroubleToggle", "Trouble" },
-	opts = { use_diagnostic_signs = true },
+	cmd = "Trouble",
+	opts = {},
 	keys = {
-		{ "<leader>dd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Diagnostics Document (Trouble)" },
-		{ "<leader>dw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Diagnostics Workspace (Trouble)" },
-		{ "<leader>dl", "<cmd>TroubleToggle loclist<cr>", desc = "[D]iagnostics [L]ocation List (Trouble)" },
-		{ "<leader>dq", "<cmd>TroubleToggle quickfix<cr>", desc = "[D]iagnostics [Q]uickfix List (Trouble)" },
+		{ "<leader>dd", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics Document (Trouble)" },
+		{ "<leader>dw", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Diagnostics Workspace (Trouble)" },
+		{ "<leader>dl", "<cmd>Trouble loclist toggle<cr>", desc = "[D]iagnostics [L]ocation List (Trouble)" },
+		{ "<leader>dq", "<cmd>Trouble qflist toggle<cr>", desc = "[D]iagnostics [Q]uickfix List (Trouble)" },
 		{
 			"[q",
 			function()
 				if require("trouble").is_open() then
-					require("trouble").previous({ skip_groups = true, jump = true })
+					require("trouble").prev({ skip_groups = true, jump = true })
 				else
 					local ok, err = pcall(vim.cmd.cprev)
 					if not ok then

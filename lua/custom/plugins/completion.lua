@@ -69,6 +69,12 @@ return {
 					},
 				},
 
+				accept = {
+					auto_brackets = {
+						enabled = true,
+					},
+				},
+
 				-- Show documentation when selecting a completion item
 				documentation = { auto_show = true, auto_show_delay_ms = 800 },
 
