@@ -23,6 +23,11 @@ subdirectory under `/lua` and create `init.lua` file under that directory.
 - Modulized nvim config from one of the nvim maitainer: [cozynvim](https://github.com/glepnir/cosynvim)
 - Yet, a modulized config with spacemacs-like style [cosmos-nvim](https://github.com/yetone/cosmos-nvim)
 
+## Learning Guide
+
+- [Treesitter in Neovim 0.12](./docs/03-treesitter.md)
+  From parser/query/capture to `:InspectTree`, `:Inspect`, textobjects, and query customization.
+
 ## Tips
 
 ### Describe keys
