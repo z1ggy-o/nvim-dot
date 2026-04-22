@@ -68,6 +68,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Fold
+vim.o.foldmethod = "indent" -- indent works fine for 95% of situations (if the indent is correct..)
 -- Keep folds available, but don't open files with everything collapsed.
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99 -- make sure unfolded when open a new buffer
+vim.opt.foldtext = '' -- Syntax highlight the first line of a fold
